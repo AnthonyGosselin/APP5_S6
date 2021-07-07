@@ -1,5 +1,13 @@
+/******************************************************/
+//       THIS IS A GENERATED FILE - DO NOT EDIT       //
+/******************************************************/
+
+#line 1 "c:/_Projects/APP5_S6/src/App5_S6.ino"
 #include "Particle.h"
 
+void setup();
+void loop();
+#line 3 "c:/_Projects/APP5_S6/src/App5_S6.ino"
 int cloudValue = 0;
 
 int publishValue = 0;
