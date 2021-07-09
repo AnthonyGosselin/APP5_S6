@@ -7,16 +7,8 @@
 
 *.o
 
-target/2.1.0/argon/APP5_S6.map
+target/2.1.0/
 
-target/2.1.0/argon/APP5_S6.lst
+src/node_modules/
 
-target/2.1.0/argon/APP5_S6.hex
-
-target/2.1.0/argon/APP5_S6.elf
-
-target/2.1.0/argon/APP5_S6.dfu
-
-target/2.1.0/argon/APP5_S6.bin.no_crc
-
-main.cpp
+*.cpp
