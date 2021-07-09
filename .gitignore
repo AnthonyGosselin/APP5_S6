@@ -11,4 +11,4 @@ target/2.1.0/
 
 src/node_modules/
 
-main.cpp
+*.cpp

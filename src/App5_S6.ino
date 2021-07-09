@@ -24,10 +24,25 @@ unsigned long scannedTime = 0;
 //   //Log.trace("Address: %s. Type: %s", beacon.getAddress().toString().c_str(), (type == NEW) ? "Entered" : "Left");
 // }
 
+void controlEventHandler(const char *event, const char *data) {
+	Serial.printlnf("[ARGON] Received event: '%s'. Data: '%s'", event, (data ? data : "NULL"));
+	// TODO: implement LED behaviour
+}
+
+void archiveEventHandler(const char *event, const char *data) {
+	Serial.printlnf("[ARGON] Received event: '%s'. Data: '%s'", event, (data ? data : "NULL"));
+	// TODO: implement LED behaviour
+}
+
+
 // setup() runs once, when the device is first turned on.
 void setup() {
   // Put initialization like pinMode and begin functions here.
   Particle.variable("cloudValue", cloudValue);
+
+  // Listen to events
+  Particle.subscribe("controlEvent", controlEventHandler);
+  Particle.subscribe("archiveEvent", archiveEventHandler);
 
   // // Bluetooth section
   // BLE.on();
@@ -65,7 +80,6 @@ void loop() {
   // }
 
 
-  // The core of your code will likely live here.
   // cloudValue++;
   // secondPublishValue += 2;
   // Serial.printlnf("New value: %d", cloudValue);

@@ -5,24 +5,36 @@ var Particle = require("particle-api-js")
 var particle = new Particle()
 
 var token = "3bfa0a0963a19c588b187e479f86c3d7928723c0"
-var eventName = "controlEvent"
+
+// ---------------------
+// Particle cloud reception
+// ---------------------
+
+function sendMqttEvent(stringValue) {
+    client.publish('app5s6/relaiMqttEvent', stringValue)
+}
 
 // Archive command event
 // Get events filtered by name
-particle.getEventStream({ name: eventName, auth: token}).then(function(stream) {
+particle.getEventStream({ name: 'controlEvent', auth: token}).then(function(stream) {
     stream.on('event', function(data) {
-        console.log("Received event: ", data);
-        
+        console.log("[RELAI] Received event: ", data);
+
         // Publish to MQQT broker
-        client.publish('app5s6/someMqttEvent', data.data.toString())
+        sendMqttEvent(data.data.toString())
     });
 });
 
 // Send on start
-// client.on('connect', () => {
-//   console.log("Sending event")
-//   client.publish('app5s6/someMqttEvent', 'myValue')
-// })
+client.on('connect', () => {
+    console.log("[RELAI] Sending event on start")
+    sendMqttEvent('myValue')
+})
+
+
+// -----------------------
+// MQTT reception
+// -----------------------
 
 
 // Archive result event
@@ -36,11 +48,11 @@ client.on('message', (eventName, data) => {
 
     switch (eventName) {
         case 'app5s6/archiveDone':
-            //console.log("Data received: ", data.toString('utf8'))
+            console.log("[RELAI] MQTT data received: ", data.toString('utf8'))
             
             // Publish archive success to argon
-            var publishEventPr = particle.publishEvent({ name: 'archiveEvent', data: data.data.toString(), auth: token });
+            var publishEventPr = particle.publishEvent({ name: 'archiveEvent', data: data, auth: token });
             return
     }
-    console.log('No handler for topic %s', eventName)
+    console.log('[RELAI] No handler for topic %s', eventName)
 })
