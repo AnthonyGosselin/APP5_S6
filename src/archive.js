@@ -14,7 +14,7 @@ function saveToFile(stringValue) {
         }
         else{
             // Send event that archive was done
-            console.log(`[ARCHIVE] Archived: '${stringValue}'`)
+            console.log(`[ARCHIVE] Archive success`)
             client.publish('app5s6/archiveDone', 'success')
         }
         
