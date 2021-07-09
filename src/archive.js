@@ -10,9 +10,14 @@ function saveToFile(stringValue) {
     fs.appendFile("../logfile.txt", stringValue + '\n', err => {
         if (err) {
             console.error(err)
+            client.publish('app5s6/archiveDone', 'fail')
         }
-        // Send event that archive was done
-        client.publish('app5s6/archiveDone', 'true')
+        else{
+            // Send event that archive was done
+            console.log(`[ARCHIVE] Archived: '${stringValue}'`)
+            client.publish('app5s6/archiveDone', 'success')
+        }
+        
     })
 }
 

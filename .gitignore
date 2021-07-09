@@ -7,8 +7,10 @@
 
 *.o
 
-target/2.1.0/
+target/
 
 src/node_modules/
+
+node_modules/
 
 *.cpp

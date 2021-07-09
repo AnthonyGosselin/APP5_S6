@@ -4,7 +4,11 @@ const client = mqtt.connect('mqtt://broker.hivemq.com')
 var Particle = require("particle-api-js")
 var particle = new Particle()
 
-var token = "3bfa0a0963a19c588b187e479f86c3d7928723c0"
+// tony
+// var token = "3bfa0a0963a19c588b187e479f86c3d7928723c0"
+
+// etienne
+var token = "978846f8f59f8e110c9c272e2b1b42cd8e5e145c"
 
 // ---------------------
 // Particle cloud reception
@@ -26,10 +30,10 @@ particle.getEventStream({ name: 'controlEvent', auth: token}).then(function(stre
 });
 
 // Send on start
-client.on('connect', () => {
-    console.log("[RELAI] Sending event on start")
-    sendMqttEvent('myValue')
-})
+// client.on('connect', () => {
+//     console.log("[RELAI] Sending event on start")
+//     sendMqttEvent('myValue')
+// })
 
 
 // -----------------------
@@ -51,7 +55,7 @@ client.on('message', (eventName, data) => {
             console.log("[RELAI] MQTT data received: ", data.toString('utf8'))
             
             // Publish archive success to argon
-            var publishEventPr = particle.publishEvent({ name: 'archiveEvent', data: data, auth: token });
+            var publishEventPr = particle.publishEvent({ name: 'archiveEvent', data: data.toString('utf8'), auth: token });
             return
     }
     console.log('[RELAI] No handler for topic %s', eventName)

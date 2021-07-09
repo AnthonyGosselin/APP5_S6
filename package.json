@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "mqtt": "^4.2.8",
+    "particle-api-js": "^9.1.0"
+  }
+}
