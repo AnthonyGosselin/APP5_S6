@@ -4,10 +4,11 @@ const mqtt = require('mqtt')
 const client = mqtt.connect('mqtt://broker.hivemq.com')
 
 var listenEvent = "app5s6/relaiMqttEvent"
+var outFileLocation = require('path').resolve(__dirname, '../logfile.txt')
 
 function saveToFile(stringValue) {
     console.log(`[ARCHIVE] Writing to logfile: '${stringValue}'`)
-    fs.appendFile("../logfile.txt", stringValue + '\n', err => {
+    fs.appendFile(outFileLocation, stringValue + '\n', err => {
         if (err) {
             console.error(err)
             client.publish('app5s6/archiveDone', 'fail')
@@ -37,3 +38,6 @@ client.on('message', (eventName, data) => {
     }
     console.log('No handler for topic %s', eventName)
 })
+
+console.log("[ARCHIVE] Started")
+console.log("Logfile location: ", outFileLocation)

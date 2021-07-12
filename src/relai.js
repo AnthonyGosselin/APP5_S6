@@ -5,10 +5,10 @@ var Particle = require("particle-api-js")
 var particle = new Particle()
 
 // tony
-// var token = "3bfa0a0963a19c588b187e479f86c3d7928723c0"
+var token = "3bfa0a0963a19c588b187e479f86c3d7928723c0"
 
 // etienne
-var token = "978846f8f59f8e110c9c272e2b1b42cd8e5e145c"
+// var token = "978846f8f59f8e110c9c272e2b1b42cd8e5e145c"
 
 // ---------------------
 // Particle cloud reception
@@ -60,3 +60,5 @@ client.on('message', (eventName, data) => {
     }
     console.log('[RELAI] No handler for topic %s', eventName)
 })
+
+console.log("[RELAI] Started")

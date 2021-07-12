@@ -6,36 +6,35 @@ int led = D7;
 int publishValue = 0;
 int secondPublishValue = 0;
 
+void blinkLed(int times) {
+	for (int i = 0; i < times; i++) {
+		digitalWrite(led, HIGH);
+		delay(100);
+		digitalWrite(led, LOW);
+		delay(100);
+	}
+}
 
 void controlEventHandler(const char *event, const char *data) {
 	Serial.printlnf("[ARGON] Received event: '%s'. Data: '%s'", event, (data ? data : "NULL"));
 
 	// Flash once once a new connection is received
-  digitalWrite(led, HIGH);
-  delay(100);
-  digitalWrite(led, LOW);
+	digitalWrite(led, HIGH);
+	delay(100);
+	digitalWrite(led, LOW);
 
 }
 
 void archiveEventHandler(const char *event, const char *data) {
 	Serial.printlnf("[ARGON] Received event: '%s'. Data: '%s'", event, (data ? data : "NULL"));
 
-	// Blink twice for archive success
-  digitalWrite(led, HIGH);
-  delay(100);
-  digitalWrite(led, LOW);
-  delay(100);
-  digitalWrite(led, HIGH);
-  delay(100);
-  digitalWrite(led, LOW);
+	// Blink three times for archive success
+	blinkLed(3);
 
-  // Add another blink if archive failed
-  if(strcmp(data, "fail") == 0){
-    delay(100);
-    digitalWrite(led, HIGH);
-    delay(100);
-    digitalWrite(led, LOW);
-  }
+	// Add another blink if archive failed
+	if(strcmp(data, "fail") == 0){
+		blinkLed(1);
+	}
 
 }
 
@@ -51,6 +50,7 @@ void setup() {
   // Bluetooth section
   BLE.on();
 
+  Serial.println("[ARGON] Started");
 }
 
 // loop() runs over and over again, as quickly as it can execute.
