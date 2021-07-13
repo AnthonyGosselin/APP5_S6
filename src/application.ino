@@ -56,9 +56,6 @@ void setup() {
 // loop() runs over and over again, as quickly as it can execute.
 void loop() {
 
-  // Serial.println("Loop");
-  // delay(1000);
-
   // Scan every iBeacon
   Scanner.scan(1, SCAN_IBEACON);
   for (auto b: Scanner.getiBeacons()){
@@ -68,11 +65,5 @@ void loop() {
       Particle.publish("beaconEvent", b.getUuid());
     }
   }
-
-  // cloudValue++;
-  // secondPublishValue += 2;
-  // Serial.printlnf("New value: %d", cloudValue);
-  // Particle.publish("publishValue", String(cloudValue));
-  // // Particle.publish("secondPublishValue", String(secondPublishValue));
-  // delay(500);
+  
 }

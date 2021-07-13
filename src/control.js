@@ -1,7 +1,6 @@
 var Particle = require("particle-api-js")
 var particle = new Particle()
 
-
 // argonDiTony
 var argonId = "e00fce68c58943ceb0e9b2d8"
 var token = "3bfa0a0963a19c588b187e479f86c3d7928723c0"
@@ -17,14 +16,6 @@ var acceptedAdresses = [
 
 var lastScannedUUID = " ";
 var lastScannedTime = Math.floor(Date.now()/1000);
-
-//Get events filtered by name
-// particle.getEventStream({ name: 'publishValue', auth: token}).then(function(stream) {
-//     stream.on('event', function(data) {
-//         //console.log("Event: ", data);
-//         console.log("Value: ", data.data)
-//     });
-// });
   
 // Get events filtered by device
 particle.getEventStream({ deviceId: argonId, auth: token }).then(function(stream) {

@@ -29,12 +29,6 @@ particle.getEventStream({ name: 'controlEvent', auth: token}).then(function(stre
     });
 });
 
-// Send on start
-// client.on('connect', () => {
-//     console.log("[RELAI] Sending event on start")
-//     sendMqttEvent('myValue')
-// })
-
 
 // -----------------------
 // MQTT reception
